@@ -37,17 +37,17 @@
         @csrf
         <div class="container mt-4 card p-3 bg-white">
             <h3 class="text-center text-primary">
-                Customer Registration
+                {{$title}}
             </h3>
             <div class="row">
                 <div class="form-group col-md-6 required">
                     <label for="">Name</label>
-                    <input type="text" name="name" id="" class="form-control" value="{{$data->name}}">
+                    <input type="text" name="name" id="" class="form-control" value="{{$customers->name }}">
                     <span class=" text-danger" @error('name') {{$message}} @enderror </span>
                 </div>
                 <div class="form-group col-md-6 required">
                     <label for="">Email</label>
-                    <input type="email" name="email" id="" class="form-control">
+                    <input type="email" name="email" id="" class="form-control" value="{{$customers->email}}">
                     <span class="text-danger" @error('email') {{$message}} @enderror </span>
                 </div>
                 <div class="form-group col-md-6 required">
@@ -62,32 +62,32 @@
                 </div>
                 <div class="form-group col-md-6 required">
                     <label for="">Country</label>
-                    <input type="text" name="country" id="" class="form-control">
+                    <input type="text" name="country" id="" class="form-control" value="{{$customers->country}}">
                     <span class="text-danger" @error('country') {{$message}} @enderror </span>
                 </div>
                 <div class="form-group col-md-6 required">
                     <label for="">State</label>
-                    <input type="text" name="state" id="" class="form-control">
+                    <input type="text" name="state" id="" class="form-control" value="{{$customers->state}}">
                     <span class="text-danger" @error('state') {{$message}} @enderror </span>
                 </div>
                 <div class="form-group col-md-6 required">
                     <label for="">Address</label>
-                    <input type="text" name="address" id="" class="form-control">
+                    <input type="text" name="address" id="" class="form-control" value="{{$customers->address}}">
                     <span class="text-danger" @error('address') {{$message}} @enderror </span>
                 </div>
                 <div class="form-group col-md-6 required">
                     <label for="">Gender</label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="male" value="M" />
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="M" {{$customers->gender == "M" ? "checked" : ""}} />
                         <label for="male" class="form-chech-label">Male</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" name="gender" id="female" value="F" class="form-check-input" />
+                        <input type="radio" name="gender" id="female" value="F" class="form-check-input" {{$customers->gender == "F" ? "checked" : ""}} />
                         <label for="female" class="form-chech-label">Female</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input type="radio" name="gender" id="other" value="O" class="form-check-input" />
+                        <input type="radio" name="gender" id="other" value="O" class="form-check-input" {{$customers->gender == "O" ? "checked" : ""}} />
                         <label for="other" class="form-chech-label">Other</label>
                     </div>
 
@@ -98,7 +98,7 @@
                 </div>
                 <div class="form-group col-md-6 required">
                     <label for="">Date of birth</label>
-                    <input type="calendar" name="dob" id="" class="form-control">
+                    <input type="calendar" name="dob" id="" class="form-control" value="{{$customers->DOB}}">
                     <span class="text-danger" @error('dob') {{$message}} @enderror </span>
                 </div>
                 <div class="form-group col-md-6 required">
