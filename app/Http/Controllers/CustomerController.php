@@ -9,21 +9,18 @@ class CustomerController extends Controller
 {
     public function  create()
     {
-        // $customers = new Customer();
-        // $url = url('/customer');
-        // $title = "Register Customer";
-        // $data = compact('customer', 'url', 'title');
-        // return view('customer')->with($data);
-
-        $customers = Customer::all();
-        if (is_null($customers)) {
-            return redirect('customer');
-        } else {
-            $url = url('/customer');
-            $title = "Register Customer";
-            $data = compact('customers', 'url', 'title');
-            return view('customer')->with($data);
-        }
+        $customers = new Customer();
+        $customers->name = "";
+        $customers->email = "";
+        $customers->gender = "";
+        $customers->country = "";
+        $customers->state = "";
+        $customers->address = "";
+        $customers->DOB = "";
+        $url = url('/customer');
+        $title = "Register Customer";
+        $data = compact('customers', 'url', 'title');
+        return view('customer')->with($data);
     }
 
     public function store(Request $request)
