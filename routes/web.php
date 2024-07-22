@@ -42,6 +42,14 @@ Route::get('/customerdata', function () {
    print_r($customers->toArray([0]));
 });
 
-Route::get('/customer', [CustomerController::class, 'index']);
+Route::get("/", function () {
+   return view('index');
+});
+
+Route::get('/register', [CustomerController::class, 'create'])->name('customer.create');
 Route::post('/customer', [CustomerController::class, 'store']);
-Route::get('/customer/view', [CustomerController::class, 'view']);
+Route::get('/customer', [CustomerController::class, 'view']);
+
+Route::get('/customer/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::get('/customer/update/{id}', [CustomerController::class, 'update'])->name('customer.update');

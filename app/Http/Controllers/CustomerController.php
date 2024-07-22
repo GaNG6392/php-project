@@ -7,11 +7,23 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public function create()
+    public function  create()
     {
-        $url = url('/customer');
-        $data = compact('url');
-        return view('customer')->with($data);
+        // $customers = new Customer();
+        // $url = url('/customer');
+        // $title = "Register Customer";
+        // $data = compact('customer', 'url', 'title');
+        // return view('customer')->with($data);
+
+        $customers = Customer::all();
+        if (is_null($customers)) {
+            return redirect('customer');
+        } else {
+            $url = url('/customer');
+            $title = "Register Customer";
+            $data = compact('customers', 'url', 'title');
+            return view('customer')->with($data);
+        }
     }
 
     public function store(Request $request)
@@ -46,19 +58,33 @@ class CustomerController extends Controller
         if (!is_null($customers)) {
             $customers->delete();
         }
+        return redirect('customer');
     }
 
     public function edit($id)
     {
         $customers = Customer::find($id);
-
         if (is_null($customers)) {
             return redirect('customer');
         } else {
             $url = url('/customer/update') . "/" . $id;
-            $data = compact('customers');
-            return view('customer')->with('data', 'url');
-            // return view('customer');
+            $title = "Update Customer";
+            $data = compact('customers', 'url', 'title');
+            return view('customer')->with($data);
         }
+    }
+
+    public function update($id, Request $request)
+    {
+        $customer = Customer::find($id);
+        $customer->name = $request['name'];
+        $customer->email = $request['email'];
+        $customer->address = $request['address'];
+        $customer->country = $request['country'];
+        $customer->state = $request['state'];
+        $customer->gender = $request['gender'];
+        $customer->DOB = $request['dob'];
+        $customer->save();
+        return redirect('customer');
     }
 }
